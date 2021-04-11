@@ -1,6 +1,6 @@
-FROM resin/rpi-raspbian:jessie
+FROM balenalib/rpi-raspbian:buster
 
-MAINTAINER jakobengdahl
+MAINTAINER ratmash
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -12,10 +12,11 @@ RUN apt-get update && apt-get install -y \
     libasound2-dev \
     libasound2 \
     libasound2-data \
-    wget
+    && apt-get clean
 
-RUN wget https://github.com/Hypfer/squeezelite-downloads/raw/master/squeezelite-armv6hf
+ENV SQUEEZELITE_VERSION=1.9.9.1372
+RUN curl -L https://sourceforge.net/projects/lmsclients/files/squeezelite/linux/squeezelite-${SQUEEZELITE_VERSION}-armv6hf.tar.gz | tar xz squeezelite
 
-RUN chmod a+x squeezelite-armv6hf
+RUN chmod a+x squeezelite
 
-CMD /squeezelite-armv6hf -o $SOUNDDEVICE -s $SERVER -n $CLIENTNAME -m $CLIENTMAC
+CMD /squeezelite -o $SOUNDDEVICE -s $SERVER -n $CLIENTNAME -m $CLIENTMAC
