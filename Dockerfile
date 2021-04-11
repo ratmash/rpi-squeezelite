@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 ENV SQUEEZELITE_VERSION=1.9.9.1372
-RUN curl -L https://sourceforge.net/projects/lmsclients/files/squeezelite/linux/squeezelite-${SQUEEZELITE_VERSION}-armv6hf.tar.gz | tar xz squeezelite
+RUN curl -L https://sourceforge.net/projects/lmsclients/files/squeezelite/linux/squeezelite-${SQUEEZELITE_VERSION}-armhf.tar.gz | tar xz squeezelite
 
 RUN chmod a+x squeezelite
 
