@@ -1,8 +1,7 @@
 # rpi-squeezelite
+A squeezelite docker image for your raspberry pi, forked from jakobengdahl/rpi-squeezelite, also incorporating tweaks from  baztian/rpi-squeezelite 
 
-Forked from jakobengdahl/rpi-squeezelite
-
-A squeezelite docker image for your raspberry pi based on resin/rpi-raspbian:jessie.
+Updated to use latest raspbian build (balenalib/rpi-raspbian:buster) and squeezelite 1.9.9.1372
 
 It looks for the following environment variables for the parameters of squeezelite: CLIENTNAME, SERVER, CLIENTMAC, SOUNDDEVICE and all variables must be set at launch.
 
