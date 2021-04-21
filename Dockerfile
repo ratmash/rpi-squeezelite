@@ -1,10 +1,11 @@
-FROM balenalib/rpi-raspbian:buster
+FROM balenalib/rpi-raspbian:latest
 
 MAINTAINER ratmash
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y \
+    ca-certificates \
     usbutils \
     libflac-dev \
     libfaad2  \
@@ -14,9 +15,13 @@ RUN apt-get update && apt-get install -y \
     libasound2-data \
     && apt-get clean
 
+RUN update-ca-certificates
+
 ENV SQUEEZELITE_VERSION=1.9.9.1372
-RUN curl -L https://sourceforge.net/projects/lmsclients/files/squeezelite/linux/squeezelite-${SQUEEZELITE_VERSION}-armhf.tar.gz | tar xz squeezelite
+RUN curl -L --cacert /etc/ssl/certs/ca-certificates.crt -L https://sourceforge.net/projects/lmsclients/files/squeezelite/linux/squeezelite-${SQUEEZELITE_VERSION}-armhf.tar.gz | tar xz squeezelite
 
 RUN chmod a+x squeezelite
 
-CMD /squeezelite -o $SOUNDDEVICE -s $SERVER -n $CLIENTNAME -m $CLIENTMAC
+RUN date >/build-date.txt
+
+CMD echo Image built: $(cat /build-date.txt) && /squeezelite -o $SOUNDDEVICE -s $SERVER -n $CLIENTNAME -m $CLIENTMAC
