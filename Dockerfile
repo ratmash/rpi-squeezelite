@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN update-ca-certificates
 
-ENV SQUEEZELITE_VERSION=1.9.9.1372
+ENV SQUEEZELITE_VERSION=1.9.9.1385
 RUN curl -L --cacert /etc/ssl/certs/ca-certificates.crt -L https://sourceforge.net/projects/lmsclients/files/squeezelite/linux/squeezelite-${SQUEEZELITE_VERSION}-armhf.tar.gz | tar xz squeezelite
 
 RUN chmod a+x squeezelite
